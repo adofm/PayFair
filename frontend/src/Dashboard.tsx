@@ -5,7 +5,7 @@ export function Dashboard() {
     const { data: hash, writeContract } = useWriteContract()
 
     return (
-        <div className="h-screen w-screen flex justify-center items-center">
+        <div className="h-screen w-screen flex justify-center items-center stake">
             <div>
                 <button className='mx-2 border rounded p-2 text-2xl' onClick={() => {
                     writeContract({
@@ -36,7 +36,7 @@ function ShowStake() {
         args: ['0x2966473D85A76A190697B5b9b66b769436EFE8e5'],
     })
     return (
-        <div>
+        <div className='stake-amount'>
             You have staked {(balance?.toString())} ETH
         </div>
     )

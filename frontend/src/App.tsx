@@ -3,6 +3,8 @@ import { WagmiProvider } from 'wagmi'
 import { config } from './config'
 import { Appbar } from './Appbar'
 import { Dashboard } from './Dashboard'
+import { Welcome } from './Welcome'
+import './App.css'
  
 const queryClient = new QueryClient()
  
@@ -12,6 +14,7 @@ export default function App() {
        <QueryClientProvider client={queryClient}> 
         <Appbar />
         <Dashboard />
+        <Welcome />
        </QueryClientProvider> 
      </WagmiProvider>
    )
