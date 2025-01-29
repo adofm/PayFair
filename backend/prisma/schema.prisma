@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  walletAddress   String  @id
+  reputationScore Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  jobHistory      JobRelation[]
+}
+
+model Job {
+  jobId       String  @id
+  title       String
+  description String
+  budget      Float
+  currency    String
+  status      String
+  users       JobRelation[]
+}
+
+model JobRelation {
+  userId  String
+  jobId   String
+  user    User @relation(fields: [userId], references: [walletAddress], onDelete: Cascade)
+  job     Job  @relation(fields: [jobId], references: [jobId], onDelete: Cascade)
+
+  @@id([userId, jobId]) // Composite primary key to prevent duplicates
+}

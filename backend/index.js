@@ -8,9 +8,7 @@ import ipfsRouter from './routes/ipfs.js';
 const app = express();
 
 // Loading config file .env
-dotenv.config({
-    path:"../.env"
-})
+dotenv.config()
 
 app.use(express.json())
 app.get("/",(req,res)=>{
