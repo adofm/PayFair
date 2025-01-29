@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 
 import userRouter from './routes/users.js';
 import jobRouter from './routes/jobs.js';
-import ipfsRouter from './routes/ipfs.js';
+import jobRelationsRouter from "./routes/jobRelations.js"
 
 const app = express();
 
@@ -16,14 +16,19 @@ app.get("/",(req,res)=>{
 })
 app.use("/users",userRouter);
 app.use("/jobs",jobRouter);
-app.use("/ipfs",ipfsRouter);
+app.use("/jobRelations",jobRelationsRouter)
+
+// Error handler
+app.use((err,req,res,next)=>{
+    console.log("An Error Occured")
+    res.json({error:err})
+})
 
 app.get("*",(req,res)=>{
     res.status(404).json({
-        "message":"404 Page not found"
+        message:"404 Page not found"
     })
 })
-
 
 app.listen(process.env.PORT,()=>{
     console.log(`Serving moves and servers on http://localhost:${process.env.PORT}`);
